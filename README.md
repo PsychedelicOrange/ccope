@@ -30,7 +30,8 @@ user_struct[?] a = 0; # a pointer to a struct
 a[0].member; # instead of a->member, the -> operater is another thing to remember
 
 int myfunction ( user_struct[1] a ){ # better way to pass a single element pointer, also able to signal to the caller about size
-
+user_struct b = 0;
+myfunction(&b); # address of operator works fine and can be used to get the address of stack variables
 }
 ```
 
