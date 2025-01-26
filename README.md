@@ -24,7 +24,8 @@ int[?] a = 0; # better way to declare pointer is to write as an array with unkno
 
 a[0] # better way to derefrence a pointer instead of *a
 
-user_struct[1] a; # pointer to a struct
+user_struct[1] a = {{0}}; # a single element array of struct
+user_struct[?] a = 0; # a pointer to a struct
 
 a[0].member; # instead of a->member, the -> operater is another thing to remember
 
