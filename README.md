@@ -37,8 +37,10 @@ myfunction(&b); # address of operator works fine and can be used to get the addr
 
 so * and -> symbols will be removed from the language
 
-for begginers we can teach them, arrays are passed by reference
+for begginers we can teach them,
+ arrays are passed by reference
 while single values are passed by value
+arrays without the [] are address to the start of the array. address of a single variable can be accessed via & operator
 - pointer arithmetic TODO
 
 ### structs, enums, and unions 
