@@ -1,5 +1,6 @@
 # ccope - written to cope with c syntax and isms. 
-- I'm having fun with this
+- repo is a work in progress where i straighten out my ideas about what i would want in a language
+
 ## Pointers for me to stick to
  * make c simpler to learn, understand and write
  * dont stray away from c, think of this like a c reskin ?
