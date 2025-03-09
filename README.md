@@ -1,4 +1,4 @@
-# ccope - written to cope with c syntax and isms.
+# ccope - written to cope with c ( name tbd )
 - repo is a work in progress where i straighten out my ideas about what i would want in a language
 - many of the details mentioned below are subject to change
 
