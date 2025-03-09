@@ -23,7 +23,8 @@ void checkWordAndAddToken(struct Hashmap hashmap, struct TOKENS *tokens,
     // add identifier
     // logd("above token not found in reserved hash");
     struct TOKEN token;
-    token.utoken.identifier = string_copy_c_style(tempword, temp_index);
+    token.utoken.identifier.iden_string =
+        string_copy_c_style(tempword, temp_index);
     token.tokentype = IDENTIFIER;
     tokens->array[(tokens->index)++] = token;
     // logd("IDENTIFIER ADDED: ");

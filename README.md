@@ -1,5 +1,81 @@
-# ccope - written to cope with c syntax and isms. 
+# ccope - written to cope with c syntax and isms.
 - repo is a work in progress where i straighten out my ideas about what i would want in a language
+
+# Scope and name conflict management
+## module/package/bundle
+Whatever name you call it, we use this simple construct for package management. It **is** a directory with source files.
+Currently a need for a description file is not necessary, but may be later added to aid automatic dependency gathering.
+Structure of a package
+```
+.
+└── stringlibrary/ ( a module )
+    └── src/
+        ├── main.c
+        └── memorylibrary/ ( another module )
+            ├── memhelper.c
+            ├── memalloc.c
+            └── interface.h
+```
+
+## Namespaces
+These can be split ( contributed to ) across multiple files.
+
+Internally, symbols in a namespace are prefixed by the namespace name.
+
+To prevent name conflicts between namespaces defined in different modules ( by different authors ),
+while importing(using) namespaces, the module which has the desired namespace needs to be specified. 
+
+Needless to say, two symbols cannot share the same name inside a module.
+Now  modules are achieveing something similar to namespace, why even introduce namespaces when a module works?
+
+Well, modules solve the naming conflicts between multiple modules. But what about internal projects?
+Sure we could  solve it via internal nesting of modules in inside projects. But it would look like a java nightmare
+```
+.
+└── algorithms/
+    ├── Vector/
+    │   ├── print.c
+    │   └── vector.c
+    ├── HashMap/
+    │   ├── test/
+    │   │   ├── test1.c
+    │   │   └── test2.c
+    │   ├── map.c
+    │   └── print.c
+    └── log/
+        └── log.c
+```
+A neater way, imo, is to allow namespaces to separate symbols across files, rather than force the user to create needless directories.
+
+So we could do something like this, with each file containing a @namespace.
+```
+algorithms/
+├── vector.c
+├── hashmap.c
+├── test.c
+├── print.c
+└── log.c
+```
+
+or even everything in a single file if we wish.
+```C algorithms.c
+@namespace("hashmap"){
+...
+    @namespace("test"){
+    ...
+    }
+}
+@namespace("vector"){
+...
+    @namespace("test"){
+    ...
+    }
+}
+@namespace("log"){
+...
+}
+```
+So namespaces allow much more flexibility to the user to use their own philosophy for project structure management.
 
 ## Pointers for me to stick to
  * make c simpler to learn, understand and write

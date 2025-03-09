@@ -77,7 +77,16 @@ union UTOKEN {
 
 enum TOKEN_TYPE { SYMBOL, KEYWORD, IDENTIFIER };
 
+struct cursor {
+  /* lexer responsibility to fill these per token */
+  char file[256];
+  size_t scope;
+  size_t line;
+  size_t loc;
+};
+
 struct TOKEN {
+  struct cursor cursor;
   union UTOKEN utoken;
   enum TOKEN_TYPE tokentype;
 };

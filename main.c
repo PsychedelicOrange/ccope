@@ -28,7 +28,7 @@ void print_tokens(struct TOKENS tokens) {
       logp("%s",
            hash_getString(hashmap, tokens.array[i].utoken.multi_token).array);
     else
-      logp("%s", tokens.array[i].utoken.identifier.array);
+      logp("%s", tokens.array[i].utoken.identifier.iden_string);
     logp(" ");
   }
 }
