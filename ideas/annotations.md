@@ -60,22 +60,23 @@ Nesting namespaces: Namespaces can be nested, and the child namespaces will be r
 
 Note: This prefix can be overridden by the user while `@import`ing this namespace
 
-@import(.namespace="Containers.Vector",.file="src/log.c",.lib="glu32")
+@import(.namespace="Module::Namespace::subNamespace",.file="src/log.c",.lib="glu32")
 ---
 > Type: File, Scope
 
 Will make symbols from a namespace/file/lib available to the file/scope.
 
-- `.prefix` will add a prefix to the imported symbols. The prefix will be overridden if already specified for the symbols.
+- `.as` will allow use of the value specified as the prefix for the imported symbols (module::namespace:: ) 
 This is useful to prevent naming conflicts when importing two namespaces with clashing prefix !!!!
+Note: This can only used with files created for the new module system. 
 - `.namespace` will make the namespace symbols accessible to the file/scope.
 - `.file` will make the file symbols accessible to the file/scope.
 - `.lib` will make the lib symbols accessible to the file/scope.
 
-Note: if the prefix is specified, only one symbol source is allowed per `@import` (ie. namespace, file, or lib).
-Note: I don't know if I'll be able to prefix symbols from libraries
+Note: if the `.as` is specified, only one symbol source is allowed per `@import` (ie. namespace, file, or lib).
 
 @Private
 ---
 > Type: Function, Struct, Enum, Union, Variable
 
+Hides the annotated entity from being `@imported`.

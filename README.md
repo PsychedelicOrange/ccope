@@ -13,15 +13,14 @@
 # Core features
 The features are all (almost) based on annotations, which are special functions which are processed by the pre-processor.
 
-These features are baked in, and wouldn't make sense to skip if we are using this library. 
+## These features are baked in, and wouldn't make sense to skip if we are using this library. 
 Also these won't work on old pre-processor based C project.
 - [ ] order independent declarations/definitions in a file. 
 - [ ] order independent imports. 
 - [ ] modules and namespaces resolution.
 
-These features are optional
-
-[Ideas about annotations](idea/annotations.md)
+## These features are optional
+[Ideas about annotations](https://github.com/PsychedelicOrange/ccope/blob/master/ideas/annotations.md)
 
 # Reasoning behind decisions
 ## Scope and name conflict management
