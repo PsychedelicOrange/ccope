@@ -3,104 +3,121 @@
 
 #include "stringstruct.h"
 
-enum KEYWORD {
-  NULL_DEBUG = 128,
-  BREAK,
-  CASE,
-  CHAR,
-  CONST,
-  CONTINUE,
-  DEFAULT,
-  DOUBLE,
-  ELSE,
-  ENUM,
-  EXTERN,
-  FLOAT,
-  FOR,
-  IF,
-  INT,
-  LONG,
-  RETURN,
-  SHORT,
-  SIGNED,
-  SIZEOF,
-  STATIC,
-  STRUCT,
-  SWITCH,
-  TYPEDEF,
-  UNION,
-  UNSIGNED,
-  WHILE,
+enum KEYWORD
+{
+    NULL_DEBUG = 128,
+    BREAK,
+    CASE,
+    CHAR,
+    CONST,
+    CONTINUE,
+    DEFAULT,
+    DOUBLE,
+    ELSE,
+    ENUM,
+    EXTERN,
+    FLOAT,
+    FOR,
+    IF,
+    INT,
+    LONG,
+    RETURN,
+    SHORT,
+    SIGNED,
+    SIZEOF,
+    STATIC,
+    STRUCT,
+    SWITCH,
+    TYPEDEF,
+    UNION,
+    UNSIGNED,
+    WHILE,
 };
 
-enum SYMBOL {
-  EQUAL = '=',
-  PLUS = '+',
-  HYPHEN = '-',
-  FSLASH = '/',
-  BSLASH = '\\',
-  LPAREN = '(',
-  RPAREN = ')',
-  LBRACE = '{',
-  RBRACE = '}',
-  LSQUARE = '[',
-  RSQUARE = ']',
-  LANKLE = '<',
-  RANKLE = '>',
-  HASH = '#',
-  COLON = ':',
-  SEMICOLON = ';',
-  QUOTE = '\'',
-  DQUOTE = '"',
-  QUESTION = '?',
-  COMMA = ',',
-  EXCLAMATION = '!',
-  EQ = 69,
-  GTE = 71,
-  LTE = 76,
-  NOTEQ = 78,
-  NEW_LINE = '\n'
+enum SYMBOL
+{
+    EQUAL = '=',
+    PLUS = '+',
+    HYPHEN = '-',
+    FSLASH = '/',
+    BSLASH = '\\',
+    LPAREN = '(',
+    RPAREN = ')',
+    LBRACE = '{',
+    RBRACE = '}',
+    LSQUARE = '[',
+    RSQUARE = ']',
+    LANKLE = '<',
+    RANKLE = '>',
+    HASH = '#',
+    COLON = ':',
+    SEMICOLON = ';',
+    QUOTE = '\'',
+    DQUOTE = '"',
+    QUESTION = '?',
+    COMMA = ',',
+    EXCLAMATION = '!',
+    AT = '@',
+    EQ = 69,
+    GTE = 71,
+    LTE = 76,
+    NOTEQ = 78,
+    NEW_LINE = '\n'
 };
 
-enum IDENTIFIER_TYPE { NUMBER, STRING_LITERAL, CHAR_LITERAL, NAME };
+enum IDENTIFIER_TYPE
+{
+    NUMBER,
+    STRING_LITERAL,
+    CHAR_LITERAL,
+    NAME
+};
 
-struct IDENTIFIER {
-  enum IDENTIFIER_TYPE type;
-  struct string iden_string;
+struct IDENTIFIER
+{
+    enum IDENTIFIER_TYPE type;
+    struct string iden_string;
 };
 
 union UTOKEN {
-  enum KEYWORD multi_token;
-  enum SYMBOL single_token;
-  struct IDENTIFIER identifier;
+    enum KEYWORD multi_token;
+    enum SYMBOL single_token;
+    struct IDENTIFIER identifier;
 };
 
-enum TOKEN_TYPE { SYMBOL, KEYWORD, IDENTIFIER };
-
-struct cursor {
-  /* lexer responsibility to fill these per token */
-  char file[256];
-  size_t scope;
-  size_t line;
-  size_t loc;
+enum TOKEN_TYPE
+{
+    SYMBOL,
+    KEYWORD,
+    IDENTIFIER
 };
 
-struct TOKEN {
-  struct cursor cursor;
-  union UTOKEN utoken;
-  enum TOKEN_TYPE tokentype;
+struct cursor
+{
+    /* lexer responsibility to fill these per token */
+    char *file;
+    size_t scope;
+    size_t line;
+    size_t col;
 };
 
-struct TOKENS {
-  struct TOKEN *array;
-  size_t index;
-  size_t size;
+struct TOKEN
+{
+    struct cursor cursor;
+    union UTOKEN utoken;
+    enum TOKEN_TYPE tokentype;
+};
+
+struct TOKENS
+{
+    struct TOKEN *array;
+    size_t index;
+    size_t size;
 };
 
 void tokens_init(struct TOKENS *tokens, size_t size);
 
-void tokens_add_singletoken(struct TOKENS *tokens, enum SYMBOL singletoken);
-
+void tokens_add_singletoken(struct TOKENS *tokens, enum SYMBOL singletoken, char *file, size_t line, size_t col);
 int tokens_is_singletoken(struct TOKEN token, enum SYMBOL c);
 
 #endif // INCLUDE_TOKEN_COPE

@@ -1,5 +1,17 @@
 # Annotation based ideas
 
+@Test
+---
+> Type: function
+
+Will generate a build target for that function/ add to existing test suit.
+
+@Inline 
+---
+> Type: function
+
+Will neccesarrily inline the function. usefull in cases where u don't want to create a parameter copy or pass a pointer and do dereferencing in the function body.
+
 @ToString
 ---
 > Type: Enum
@@ -75,8 +87,25 @@ Note: This can only used with files created for the new module system.
 
 Note: if the `.as` is specified, only one symbol source is allowed per `@import` (ie. namespace, file, or lib).
 
+@include
+---
+> Type: File, Scope
+
+old c-style #include symbols from the file into the scope.
+
 @Private
 ---
 > Type: Function, Struct, Enum, Union, Variable
 
 Hides the annotated entity from being `@imported`.
+
+@ForwardDeclare
+---
+> Type: Function, Struct, Enum, Union, Variable
+
+Creates a forward declaration for the annotated entity at the top of the file. If @ForwardDeclareFunctions is also enabled for the scope, this annotation has not effect on functions.
+
+1. @ForwardDeclareFunctions
+> Type: File, Scope
+
+Forward declares all functions which don't have a declaration. This allows for functions to be defined in any order.

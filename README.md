@@ -17,13 +17,30 @@ The features are all (almost) based on annotations, which are special functions 
 Also these won't work on old pre-processor based C project.
 - [ ] order independent declarations/definitions in a file. 
 - [ ] order independent imports. 
-- [ ] modules and namespaces resolution.
+- [ ] modules and namespaces based scope system.
 
 ## These features are optional
 [Ideas about annotations](https://github.com/PsychedelicOrange/ccope/blob/master/ideas/annotations.md)
 
+# Idea behind modules and namespaces
+Currently we have a global scope in C inside the project. There is also a file scope, which is implicit. ( One file can't read the symbols of another without forward declaring)
+
+After introducing modules and namespaces,
+we will have a module scope and a namespace scope. Module scope will replace the global scope.
+This allow us to get rid of the implicit file scope phenomenon. So there will be no need to 'import' symbols between files in the same module.
+
+Now, if we want symbols from _another_ module, we will do a '@import' specifying the module name.
+Here all the symbols will be made available to the whole scope.
+
+Namespace scopes allows us to create named scopes , but unlike module scope, they don't have to be tied to a directory. This is convinient for intra-module scope separation. Apart from that they have no difference with module scopes.
+## When to namespace, when to module - that is the question
+No such constraint is imposed, but intuitively -
+When you would want to resuse the code in other projects/modules use modules (it's easier to copy a folder) . when you want to use it within that context only, use namespaes.
+
+- Entry Point: modules can specify entry points at compile-time, by naming the function as an argument
+
 # Reasoning behind decisions
-## Scope and name conflict management
+## Scope and name conflict management using modules and namespaces
 ### module/package/bundle
 Whatever name you call it, we use this simple construct for package management. It **is** a directory with source files.
 ```
